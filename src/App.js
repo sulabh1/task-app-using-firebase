@@ -15,7 +15,9 @@ function App() {
       .onSnapshot((snapshot) => {
         // console.log(snapshot.docs.map((item) => item.data()));
         //reading the data and puts in the nice format
-        setTodos(snapshot.docs.map((item) => item.data().todo));
+        setTodos(
+          snapshot.docs.map((item) => ({ id: item.id, todo: item.data().todo }))
+        );
       });
   }, []);
 
@@ -49,8 +51,8 @@ function App() {
       </form>
 
       <ul>
-        {todos.map((item) => (
-          <Todos todo={item} />
+        {todos.map((todo) => (
+          <Todos todo={todo} />
         ))}
       </ul>
     </div>
